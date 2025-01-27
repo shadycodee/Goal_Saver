@@ -4,6 +4,8 @@ const Dashboard = lazy(() => import('./Pages/Dashboard'))
 const LandingPage = lazy(() => import('./Pages/LandingPage'))
 const Login = lazy(() => import('./Pages/Login'))
 
+import './App.css';
+
 function App() {
 
 
