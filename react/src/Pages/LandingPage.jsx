@@ -9,11 +9,11 @@ function LandingPage() {
         <Paper elevation={0} style={{ padding: '2rem', border: '2px solid #053225' }}>
           <h1>Create an account</h1>
           <h5>
-            Already have an account? <Link to="/login">Log in</Link>
+            Already have an account? <Link to="/login" style={{ textDecoration: 'none', color: '#053225' }}>Sign in</Link>
           </h5>
-          <TextField fullWidth margin="normal" id="name" label="Name" variant="standard" />
-          <TextField fullWidth margin="normal" id="username" label="Username" variant="standard" />
-          <TextField fullWidth margin="normal" id="password" label="Password" variant="standard" type="password" />
+          <TextField fullWidth margin="normal" id="name" label="Name" variant="standard" color='#053225' />
+          <TextField fullWidth margin="normal" id="username" label="Username" variant="standard" color='#053225' />
+          <TextField fullWidth margin="normal" id="password" label="Password" variant="standard" type="password" color='#053225' />
           <Button fullWidth variant="contained"  style={{ marginTop: '1rem', backgroundColor: '#053225' }}>
             Create account
           </Button>
