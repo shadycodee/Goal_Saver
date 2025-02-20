@@ -2,8 +2,11 @@ import React from 'react'
 
 function Dashboard() {
   return (
-    <div>Dashboard</div>
+    <div>
+      <h1>Goal Saver</h1>
+    </div>
   )
 }
 
 export default Dashboard
+
