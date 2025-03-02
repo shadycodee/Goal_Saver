@@ -1,11 +1,52 @@
-.short-term-div {
-    border: 3px solid black;
+.dashboard-container {
+    max-width: 500px;
+    margin: auto;
+    padding: 20px;
+    border: 2px solid black;
+    border-radius: 8px;
+    text-align: center;
 }
 
-.medium-term-div {
-    border: 3px solid black;
+.date-text {
+    font-weight: bold;
+    color: black;
 }
 
-.long-term-div {
+.budget-section {
+    margin-bottom: 20px;
+}
+
+.budget-input {
+    margin: 10px 0;
+}
+
+.save-btn {
+    background-color: #1B4D3E !important;
+    /* Deep green */
+    color: white !important;
+    border-radius: 5px;
+    padding: 8px 20px;
+    font-weight: bold;
+}
+
+.savings-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.savings-box {
+    flex: 1;
+    min-width: 140px;
+    padding: 15px;
     border: 3px solid black;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.add-btn {
+    background-color: #1B4D3E !important;
+    color: white !important;
+    margin-top: 10px;
 }
