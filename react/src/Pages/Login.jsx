@@ -15,8 +15,8 @@ function Login() {
     <Paper elevation={0}  variant="outlined" style={{ padding: '2rem', border: '2px solid #053225' }}>
     <h1>Sign in</h1>
         <h5>Dont have an account? <Link to="/" style={{ textDecoration: 'none', color: '#053225' }}>Register</Link></h5>
-        <TextField fullWidth id="outlined-basic" label="Username" variant="standard" />
-        <TextField fullWidth id="outlined-basic" label="Password" variant="standard" />
+        <TextField fullWidth id="outlined-basic" label="Username" variant="standard" color='#053225' />
+        <TextField fullWidth id="outlined-basic" label="Password" variant="standard" color='#053225' />
         <Button fullWidth variant="contained" onClick={handleSignIn} style={{ marginTop: '1rem', backgroundColor: '#053225' }}>Sign in</Button>
     </Paper>
     </Grid>
