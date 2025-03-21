@@ -33,12 +33,13 @@ export default function Dashboard() {
       {/* Date Display */}
       <h1 className="text-2xl font-bold text-center">{today}</h1>
       
+
       {/* Set Savings Budget */}
       <Card>
         <CardContent className="p-4 space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="text-lg font-semibold">Savings Budget: ₱{savingsBudget}</h2>
-            <Button onClick={handleBudgetSubmit}>Set Budget</Button>
+            <Button onClick={handleBudgetSubmit} className="hover:bg-[#25b34b] hover:text-white" variant="outline">Set Budget</Button>
           </div>
           <Input 
             placeholder="Enter savings budget" 
@@ -48,7 +49,8 @@ export default function Dashboard() {
         </CardContent>
       </Card>
       
-      {/* Savings Sections */}
+      <div className="flex flex-wrap justify-between gap-4">
+        {/* Savings Sections */}
       {["shortTerm", "mediumTerm", "longTerm"].map((type) => (
         <Card key={type}>
           <CardContent className="p-4 space-y-4">
@@ -66,6 +68,8 @@ export default function Dashboard() {
           </CardContent>
         </Card>
       ))}
+      </div>
+      
     </div>
   );
 }
@@ -92,7 +96,7 @@ function AddSavingForm({ onSave }) {
       <Input type="date" value={targetDate} onChange={(e) => setTargetDate(e.target.value)} />
       <Label>Budget</Label>
       <Input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="Enter budget" />
-      <Button className="mt-2" onClick={handleSubmit}>Add Savings</Button>
+      <Button className="hover:bg-[#25b34b] hover:text-white mt-2" onClick={handleSubmit} variant="outline">Add Savings</Button>
     </div>
   );
 }

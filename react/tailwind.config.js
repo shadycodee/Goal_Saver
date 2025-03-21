@@ -7,6 +7,9 @@ module.exports = {
       fontFamily: {
         sans: ["Inter", ...fontFamily.sans],
       },
+      colors: {
+        'saveButton': '#25b34b',
+      }
     },
   },
   plugins: [],
