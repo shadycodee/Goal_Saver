@@ -1,79 +1,98 @@
 import { useState } from "react";
-import { Card, CardContent, Typography, Button, Dialog, DialogTitle, DialogContent, TextField, LinearProgress } from "@mui/material";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { format } from "date-fns";
 
 export default function Dashboard() {
-  const [budget, setBudget] = useState(0);
-  const [savings, setSavings] = useState({ short: 0, medium: 0, long: 0 });
-  const [modalOpen, setModalOpen] = useState(false);
-  const [selectedTerm, setSelectedTerm] = useState("");
-  const [amount, setAmount] = useState("");
-  const today = new Date();
-  const formattedDate = today.toLocaleDateString("en-US", {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
+  const [savingsBudget, setSavingsBudget] = useState(0);
+  const [budgetInput, setBudgetInput] = useState("");
+  const [savings, setSavings] = useState({
+    shortTerm: [],
+    mediumTerm: [],
+    longTerm: [],
   });
 
-  const openModal = (term) => {
-    setSelectedTerm(term);
-    setModalOpen(true);
+  const today = format(new Date(), "EEEE, MMMM d, yyyy");
+
+  const handleBudgetSubmit = () => {
+    setSavingsBudget(budgetInput);
+    setBudgetInput("");
   };
 
-  const addSavings = () => {
-    setSavings({ ...savings, [selectedTerm]: savings[selectedTerm] + Number(amount) });
-    setModalOpen(false);
-    setAmount("");
+  const addSaving = (type, description, targetDate, amount) => {
+    setSavings((prev) => ({
+      ...prev,
+      [type]: [...prev[type], { description, targetDate, amount }],
+    }));
   };
 
   return (
-    <div style={{ padding: "24px", maxWidth: "600px", margin: "auto" }}>
-      <Typography variant="h4" gutterBottom>Dashboard</Typography>
-      <Typography variant="subtitle2" color="textSecondary">Date: {formattedDate}</Typography>
+    <div className="p-6 space-y-6 max-w-4xl mx-auto">
+      {/* Date Display */}
+      <h1 className="text-2xl font-bold text-center">{today}</h1>
       
-      <div style={{ marginBottom: "16px" }}>
-        <Typography variant="body1">Set Your Savings Budget</Typography>
-        <TextField
-          type="number"
-          fullWidth
-          variant="outlined"
-          placeholder="Enter amount"
-          value={budget}
-          onChange={(e) => setBudget(e.target.value)}
-        />
-      </div>
-      
-      <div style={{ display: "grid", gap: "16px" }}>
-        {['short', 'medium', 'long'].map((term) => (
-          <Card key={term} style={{ padding: "16px" }}>
-            <CardContent>
-              <Typography variant="h6" gutterBottom>{term.charAt(0).toUpperCase() + term.slice(1)} Term Savings</Typography>
-              <LinearProgress variant="determinate" value={(savings[term] / budget) * 100} />
-              <Button variant="contained" color="primary" style={{ marginTop: "8px" }} onClick={() => openModal(term)}>
-                Add Savings
-              </Button>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-      
-      <Dialog open={modalOpen} onClose={() => setModalOpen(false)}>
-        <DialogTitle>Add Savings to {selectedTerm} Term</DialogTitle>
-        <DialogContent>
-          <TextField
-            type="number"
-            fullWidth
-            variant="outlined"
-            placeholder="Enter amount"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-            style={{ marginTop: "16px" }}
+      {/* Set Savings Budget */}
+      <Card>
+        <CardContent className="p-4 space-y-4">
+          <div className="flex items-center justify-between">
+            <h2 className="text-lg font-semibold">Savings Budget: ₱{savingsBudget}</h2>
+            <Button onClick={handleBudgetSubmit}>Set Budget</Button>
+          </div>
+          <Input 
+            placeholder="Enter savings budget" 
+            value={budgetInput} 
+            onChange={(e) => setBudgetInput(e.target.value)} 
           />
-          <Button variant="contained" color="primary" style={{ marginTop: "16px" }} onClick={addSavings}>
-            Confirm
-          </Button>
-        </DialogContent>
-      </Dialog>
+        </CardContent>
+      </Card>
+      
+      {/* Savings Sections */}
+      {["shortTerm", "mediumTerm", "longTerm"].map((type) => (
+        <Card key={type}>
+          <CardContent className="p-4 space-y-4">
+            <h2 className="text-lg font-semibold capitalize">{type.replace("Term", "-Term Savings")}</h2>
+            <div className="space-y-2">
+              {savings[type].map((item, index) => (
+                <div key={index} className="p-2 border rounded-lg">
+                  <p><strong>Description:</strong> {item.description}</p>
+                  <p><strong>Target Date:</strong> {item.targetDate}</p>
+                  <p><strong>Budget:</strong> ₱{item.amount}</p>
+                </div>
+              ))}
+            </div>
+            <AddSavingForm onSave={(desc, date, amount) => addSaving(type, desc, date, amount)} />
+          </CardContent>
+        </Card>
+      ))}
+    </div>
+  );
+}
+
+function AddSavingForm({ onSave }) {
+  const [description, setDescription] = useState("");
+  const [targetDate, setTargetDate] = useState("");
+  const [amount, setAmount] = useState("");
+
+  const handleSubmit = () => {
+    if (description && targetDate && amount) {
+      onSave(description, targetDate, amount);
+      setDescription("");
+      setTargetDate("");
+      setAmount("");
+    }
+  };
+
+  return (
+    <div className="space-y-2">
+      <Label>Description</Label>
+      <Input value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Enter description" />
+      <Label>Target Date</Label>
+      <Input type="date" value={targetDate} onChange={(e) => setTargetDate(e.target.value)} />
+      <Label>Budget</Label>
+      <Input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="Enter budget" />
+      <Button className="mt-2" onClick={handleSubmit}>Add Savings</Button>
     </div>
   );
 }
