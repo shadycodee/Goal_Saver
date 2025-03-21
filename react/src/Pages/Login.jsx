@@ -13,7 +13,7 @@ function Login() {
     <Grid container justifyContent="center" alignItems="center" style={{ minHeight: '100vh' }}>
           <Grid item xs={11} sm={8} md={6} lg={3}>
     <Paper elevation={0}  variant="outlined" style={{ padding: '2rem', border: '2px solid #053225' }}>
-    <h1>Sign in</h1>
+    <h1 class="text-xl font-boldtext-4xl font-bold my-3 sm:text-4xl sm:my-4">Sign in</h1>
         <h5>Dont have an account? <Link to="/" style={{ textDecoration: 'none', color: '#053225' }}>Register</Link></h5>
         <TextField fullWidth id="outlined-basic" label="Username" variant="standard" color='#053225' />
         <TextField fullWidth id="outlined-basic" label="Password" variant="standard" color='#053225' />

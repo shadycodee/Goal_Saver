@@ -7,7 +7,7 @@ function LandingPage() {
     <Grid container justifyContent="center" alignItems="center" style={{ minHeight: '100vh' }}>
       <Grid item xs={11} sm={8} md={6} lg={3}>
         <Paper elevation={0} style={{ padding: '2rem', border: '2px solid #053225' }}>
-          <h1>Create an account</h1>
+          <h1 class="text-4xl font-bold my-3 sm:text-4xl sm:my-4">Create an account</h1>
           <h5>
             Already have an account? <Link to="/login" style={{ textDecoration: 'none', color: '#053225' }}>Sign in</Link>
           </h5>
