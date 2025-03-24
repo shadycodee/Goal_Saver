@@ -4,6 +4,16 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { format } from "date-fns";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Dashboard() {
   const [savingsBudget, setSavingsBudget] = useState(0);
@@ -13,7 +23,8 @@ export default function Dashboard() {
     mediumTerm: [],
     longTerm: [],
   });
-
+  const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
   const today = format(new Date(), "EEEE, MMMM d, yyyy");
 
   const handleBudgetSubmit = () => {
@@ -27,11 +38,38 @@ export default function Dashboard() {
       [type]: [...prev[type], { description, targetDate, amount }],
     }));
   };
+  
+  const handleLogout = () => {
+    // Perform logout action
+    console.log("User logged out");
+    navigate('/login');
+  };
+  
 
   return (
     <div className="p-6 space-y-6 max-w-4xl mx-auto">
       {/* Date Display */}
       <h1 className="text-2xl font-bold text-center">{today}</h1>
+      <div className="flex justify-end">
+      <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>
+        <Button variant="outline" className="hover:bg-red-500 hover:text-white mt-2">Logout</Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[425px]">
+        <DialogHeader>
+          <DialogTitle>Confirm logout</DialogTitle>
+          
+        </DialogHeader>
+        <div className="grid gap-4 py-4">
+        <DialogDescription>Are you sure you want to log out? You will need to sign in again to access your account.</DialogDescription>
+        </div>
+        <DialogFooter>
+          <Button variant="destructive" onClick={handleLogout}>Logout</Button>
+          <Button type="submit" variant="outline" onClick={() => setOpen(false)}>Cancel</Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+      </div>
       
 
       {/* Set Savings Budget */}
