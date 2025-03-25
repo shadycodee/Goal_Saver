@@ -4,6 +4,9 @@ import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
 import { Menu, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
+import DarkModeToggle from "./DarkModeToggle";
+
+
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
@@ -31,6 +34,8 @@ export default function Navbar() {
               {link.name}
             </Button>
           ))}
+
+          <DarkModeToggle />
         </div>
 
         {/* Mobile Menu Button */}

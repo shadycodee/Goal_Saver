@@ -20,7 +20,7 @@ const Home = () => {
       <Typography variant="body1" paragraph>
       
       Inspired by Khan Academy’s approach to goal-based savings, this app helps you allocate funds into short-term, medium-term, and long-term savings.{" "}
-        <a href="https://www.khanacademy.org/college-careers-more/financial-literacy/xa6995ea67a8e9fdd:financial-goals/xa6995ea67a8e9fdd:short-medium-and-long-term-goals/a/short-medium-and-long-term-goals" target="_blank" rel="noopener noreferrer">Learn more</a>.
+        <a href="https://www.khanacademy.org/college-careers-more/financial-literacy/xa6995ea67a8e9fdd:financial-goals/xa6995ea67a8e9fdd:short-medium-and-long-term-goals/a/short-medium-and-long-term-goals" target="_blank" rel="noopener noreferrer">Read more</a>.
       </Typography>
 
       <TableContainer component={Paper}>
