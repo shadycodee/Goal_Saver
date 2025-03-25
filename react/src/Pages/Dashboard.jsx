@@ -13,7 +13,19 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer"
+import Navbar from "@/components/ui/navbar";
+
+
 
 export default function Dashboard() {
   const [savingsBudget, setSavingsBudget] = useState(0);
@@ -47,10 +59,14 @@ export default function Dashboard() {
   
 
   return (
-    <div className="p-6 space-y-6 max-w-4xl mx-auto">
+    <>
+    <Navbar/>
+    <div className="p-6 space-y-7 max-w-4xl mx-auto">
       {/* Date Display */}
       <h1 className="text-2xl font-bold text-center">{today}</h1>
+      
       <div className="flex justify-end">
+        
       <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant="outline" className="hover:bg-red-500 hover:text-white mt-2">Logout</Button>
@@ -70,22 +86,26 @@ export default function Dashboard() {
       </DialogContent>
     </Dialog>
       </div>
-      
+      <Drawer>
+      <DrawerTrigger asChild>
+        <Button variant="outline">Set Budget</Button>
+      </DrawerTrigger>
+      <DrawerContent className="max-w-lg mx-auto p-6">
+        <DrawerHeader>
+          <DrawerTitle>Set savings budget</DrawerTitle>
+        </DrawerHeader>
+        <div className="px-4">
+          <Input type="number" placeholder="Enter amount" className="mb-4" />
+        </div>
+        <DrawerFooter>
+          <Button>Set</Button>
+          <DrawerClose>
+            <Button variant="outline" className="w-full">Cancel</Button>
+          </DrawerClose>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
 
-      {/* Set Savings Budget */}
-      <Card>
-        <CardContent className="p-4 space-y-4">
-          <div className="flex items-center justify-between">
-            <h2 className="text-lg font-semibold">Savings Budget: ₱{savingsBudget}</h2>
-            <Button onClick={handleBudgetSubmit} className="hover:bg-[#25b34b] hover:text-white" variant="outline">Set Budget</Button>
-          </div>
-          <Input 
-            placeholder="Enter savings budget" 
-            value={budgetInput} 
-            onChange={(e) => setBudgetInput(e.target.value)} 
-          />
-        </CardContent>
-      </Card>
       
       <div className="flex flex-wrap justify-between gap-4">
         {/* Savings Sections */}
@@ -109,6 +129,7 @@ export default function Dashboard() {
       </div>
       
     </div>
+    </>
   );
 }
 
@@ -137,4 +158,5 @@ function AddSavingForm({ onSave }) {
       <Button className="hover:bg-[#25b34b] hover:text-white mt-2" onClick={handleSubmit} variant="outline">Add Savings</Button>
     </div>
   );
+  
 }
