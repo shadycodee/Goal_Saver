@@ -9,8 +9,10 @@ import DarkModeToggle from "./DarkModeToggle";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const theme = localStorage.getItem("theme");
   const navigate = useNavigate();
 
+  const isDarkMode = theme === "dark";
   const navLinks = [
     { name: "Home", path: "/home" },
     { name: "Dashboard", path: "/dashboard" },
@@ -18,7 +20,7 @@ export default function Navbar() {
 
 ];
   return (
-    <nav className="bg-white shadow-md px-6 py-4">
+    <nav classNameclassName={`${isDarkMode ? "bg-gray-900 shadow-md" : "bg-white shadow-lg shadow-gray-300"}  px-6 py-4`}>
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         {/* Logo */}
         <h1 className="text-xl font-bold">Goal Saver</h1>
